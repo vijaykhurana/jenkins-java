@@ -1,6 +1,6 @@
 pipeline {
-    //agent { docker { image 'maven:3.3.3' } }
-    agent any
+    agent { docker { image 'maven:3.3.3' } }
+    
     stages {
         stage('build') {
             steps {
@@ -14,6 +14,23 @@ pipeline {
             }
             
         }
+        stage('Deploy - Staging') {
+            steps {
+                sh './deploy staging'
+                sh './run-smoke-tests'
+            }
+        }
+
+        stage('Sanity check') {
+            steps {
+                input "Does the staging environment look ok?"
+            }
+        }
+
+        stage('Deploy - Production') {
+            steps {
+                sh './deploy production'
+            }
     }
     post {
         always {
