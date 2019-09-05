@@ -32,6 +32,7 @@ pipeline {
                 sh './deploy production'
             }
     }
+    }    
     post {
         always {
             echo 'One way or another, I have finished'
