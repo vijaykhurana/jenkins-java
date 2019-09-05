@@ -1,5 +1,6 @@
 pipeline {
-    agent { docker { image 'maven:3.3.3' } }
+    //agent { docker { image 'maven:3.3.3' } }
+    agent any
     stages {
         stage('build') {
             steps {
@@ -9,7 +10,7 @@ pipeline {
                     echo "Multiline shell steps works too"
                     ls -lah
                     '''
-                sdsdffdf
+                
             }
             
         }
